@@ -1,13 +1,2 @@
----
-
-title: ShortlistAI Resume Analyzer
-emoji: 📄
-colorFrom: green
-colorTo: blue
-sdk: docker
-app_port: 7860
-pinned: false
-
----
-
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+# ShortlistAI-AI-Based-Resume-Shortlisting-
+ShortlistAI is an attractive AI-inspired resume shortlisting application that helps recruiters, HR teams, students, and job seekers evaluate how well a resume matches a specific job description.
