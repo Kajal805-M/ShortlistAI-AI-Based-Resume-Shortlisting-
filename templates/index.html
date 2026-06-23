@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-powered resume and job description matching with explainable scoring.">
+  <title>ShortlistAI — Resume Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="ShortlistAI home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>Shortlist<span>AI</span></span>
+    </a>
+    <div class="topbar-right">
+      <span class="privacy-pill"><i></i> Private by design</span>
+      <a class="nav-link" href="#how-it-works">How it works</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="analyzer">
+      <div class="eyebrow"><span>✦</span> Intelligent candidate matching</div>
+      <h1>Find the signal.<br><em>Shortlist smarter.</em></h1>
+      <p class="hero-copy">Compare any resume against any job description with transparent, evidence-based scoring built for thoughtful hiring.</p>
+      <div class="trust-row">
+        <span>✓ Explainable scores</span><span>✓ No resume storage</span><span>✓ Bias-aware guidance</span>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Resume analyzer">
+      <form id="analyze-form" class="input-grid">
+        <article class="input-card">
+          <div class="card-heading">
+            <span class="step">01</span>
+            <div><h2>Upload resume</h2><p>PDF or DOCX · Max 8 MB</p></div>
+          </div>
+          <label class="dropzone" id="dropzone" for="resume-file">
+            <input id="resume-file" name="resume" type="file" accept=".pdf,.docx" required>
+            <span class="upload-icon">↥</span>
+            <strong>Drop your resume here</strong>
+            <span>or <u>browse your files</u></span>
+            <small>We process files in memory and never store them.</small>
+          </label>
+          <div class="file-preview" id="file-preview" hidden>
+            <span class="file-type" id="file-type">PDF</span>
+            <div><strong id="file-name"></strong><small id="file-size"></small></div>
+            <button type="button" id="remove-file" aria-label="Remove file">×</button>
+          </div>
+        </article>
+
+        <article class="input-card">
+          <div class="card-heading">
+            <span class="step">02</span>
+            <div><h2>Add job description</h2><p>Paste the complete role details</p></div>
+          </div>
+          <div class="textarea-wrap">
+            <textarea id="job-description" name="job_description" minlength="80" placeholder="Paste the job title, responsibilities, required skills, experience, and qualifications here…" required></textarea>
+            <span class="word-count"><b id="word-count">0</b> words</span>
+          </div>
+        </article>
+
+        <button class="analyze-button" id="analyze-button" type="submit">
+          <span class="button-label"><b>✦</b> Analyze candidate</span>
+          <span class="button-loading"><i></i> Reading & evaluating…</span>
+        </button>
+        <p class="form-error" id="form-error" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results-topline">
+        <div><span class="section-kicker">Candidate intelligence report</span><h2 id="result-filename">Resume analysis</h2></div>
+        <button class="secondary-button" id="new-analysis">↻ New analysis</button>
+      </div>
+
+      <div class="overview-grid">
+        <article class="score-card result-card">
+          <div class="score-ring" id="score-ring">
+            <div><strong id="match-score">0</strong><span>/100</span></div>
+          </div>
+          <div class="score-copy">
+            <span class="score-label">Overall match</span>
+            <h3 id="verdict-title"></h3>
+            <p id="verdict-message"></p>
+          </div>
+        </article>
+
+        <article class="ranking-card result-card">
+          <div class="tier" id="ranking-tier">A</div>
+          <div><span class="score-label">Estimated ranking</span><h3 id="ranking-label"></h3><p id="ranking-percentile"></p></div>
+        </article>
+
+        <article class="snapshot-card result-card">
+          <span class="score-label">Match snapshot</span>
+          <div class="snapshot-stats">
+            <div><strong id="matched-count">0</strong><span>skills matched</span></div>
+            <div><strong id="coverage-count">0%</strong><span>skill coverage</span></div>
+            <div><strong id="resume-words">0</strong><span>resume words</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="report-grid">
+        <article class="result-card breakdown-card">
+          <div class="report-heading"><div><span class="section-kicker">Performance</span><h3>Score breakdown</h3></div><span class="micro-label">Weighted model</span></div>
+          <div id="score-breakdown" class="breakdown-list"></div>
+        </article>
+
+        <article class="result-card verdict-card">
+          <span class="section-kicker">Executive summary</span>
+          <h3>Recruiter verdict</h3>
+          <div class="verdict-banner" id="verdict-banner"><span>✓</span><strong id="verdict-banner-title"></strong></div>
+          <p id="result-summary"></p>
+          <div class="fair-use"><span>◈</span><p><strong>Human review matters.</strong> This tool evaluates job-related text only and should support—not replace—fair hiring judgment.</p></div>
+        </article>
+      </div>
+
+      <div class="skills-grid">
+        <article class="result-card skills-card matched-card">
+          <div class="report-heading"><div><span class="section-kicker">Strengths</span><h3>Matched skills</h3></div><span class="count-badge" id="matched-badge">0</span></div>
+          <div class="skill-list" id="matched-skills"></div>
+        </article>
+        <article class="result-card skills-card missing-card">
+          <div class="report-heading"><div><span class="section-kicker">Opportunity</span><h3>Missing skills</h3></div><span class="count-badge" id="missing-badge">0</span></div>
+          <div class="skill-list" id="missing-skills"></div>
+        </article>
+      </div>
+
+      <article class="result-card suggestions-card">
+        <div class="report-heading"><div><span class="section-kicker">Next best actions</span><h3>Resume improvement plan</h3></div><span class="micro-label">Prioritized for impact</span></div>
+        <div class="suggestions-list" id="suggestions-list"></div>
+      </article>
+      <p class="disclaimer" id="disclaimer"></p>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+      <span class="section-kicker">Simple by design</span>
+      <h2>From upload to insight in seconds.</h2>
+      <div class="process-grid">
+        <article><span>01</span><h3>Parse</h3><p>Securely extract structured text from your PDF or DOCX resume.</p></article>
+        <article><span>02</span><h3>Compare</h3><p>Map skills, experience, education, relevance, and resume quality.</p></article>
+        <article><span>03</span><h3>Improve</h3><p>Get a clear verdict and practical, prioritized recommendations.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#"><span class="brand-mark"><span></span><span></span><span></span></span><span>Shortlist<span>AI</span></span></a><p>Responsible intelligence for better hiring decisions.</p></footer>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
