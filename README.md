@@ -9,7 +9,7 @@
 ![PDF](https://img.shields.io/badge/PDF%2FDOCX-Upload-22C55E?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
 
-### 🚀 [Live Demo / Local Preview](http://127.0.0.1:5000)
+### 🚀 [Live Demo / Local Preview](https://qv4g3xk3-5000.inc1.devtunnels.ms)
 
 </div>
 
