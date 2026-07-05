@@ -1,76 +1,90 @@
 <div align="center">
 
-# 🤖 ShortlistAI — AI Based Resume Shortlisting
+# :robot: ShortlistAI - AI Based Resume Shortlisting
 
-### A smart, explainable resume screening web app for matching any resume with any job description.
+### FastAPI web app that compares resumes with any job description and generates an explainable AI-style shortlisting report.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-Web_App-000000?style=for-the-badge&logo=flask&logoColor=white)
-![PDF](https://img.shields.io/badge/PDF%2FDOCX-Upload-22C55E?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![PDF DOCX](https://img.shields.io/badge/PDF%2FDOCX-Upload-22C55E?style=for-the-badge)
+![AI](https://img.shields.io/badge/AI-Resume%20Matching-8B5CF6?style=for-the-badge)
 
-### 🚀 [Live Demo / Local Preview](https://qv4g3xk3-5000.inc1.devtunnels.ms)
+**Upload a resume. Paste a job description. Get match score, ranking, matched skills, missing skills, verdict, and improvement suggestions.**
+
+[:rocket: Run Locally](#rocket-run-locally) | [:sparkles: Features](#sparkles-features) | [:brain: How It Works](#brain-how-it-works) | [:electric_plug: API](#electric_plug-api-endpoints) | [:file_folder: Structure](#file_folder-project-structure)
 
 </div>
 
 ---
 
-## 📌 Project Overview
+## :pushpin: Project Overview
 
-**ShortlistAI** is an attractive AI-inspired resume shortlisting application that helps recruiters, HR teams, students, and job seekers evaluate how well a resume matches a specific job description.
+**ShortlistAI** is an AI-based resume shortlisting web application built for recruiters, HR teams, students, and job seekers. It analyzes how well a candidate resume matches a specific job description and returns a clear, professional screening report.
 
-Users can upload a **PDF/DOCX resume**, paste any **job description**, and instantly receive a professional analysis report with:
+The system supports **PDF** and **DOCX** resume uploads, extracts text from the file, compares it with the job description, detects relevant skills, calculates a weighted match score, and gives practical improvement suggestions.
 
-- Match score
-- Candidate ranking tier
-- Matched skills
-- Missing skills
-- Score breakdown
-- Recruiter-style verdict
-- Resume improvement suggestions
-
-The project is designed to be **simple to run, beautiful to use, and easy to explain in college projects, interviews, and GitHub portfolios**.
+> This project is designed to be portfolio-ready, interview-friendly, and easy to explain during viva/project reviews.
 
 ---
 
-## ✨ Key Features
+## :sparkles: Features
 
 | Feature | Description |
 | --- | --- |
-| 📄 Resume Upload | Supports resume upload in `PDF` and `DOCX` format |
-| 📝 Job Description Input | Paste any job description for analysis |
-| 🎯 Match Score | Generates a professional score out of `100` |
-| 🏆 Ranking Tier | Shows candidate fit tier such as `Top Match`, `Strong Match`, or `Needs Improvement` |
-| ✅ Matched Skills | Detects skills found in both resume and job description |
-| ⚠️ Missing Skills | Highlights important skills missing from the resume |
-| 📊 Score Breakdown | Explains scoring across skills, experience, education, relevance, and quality |
-| 💡 Suggestions | Gives practical improvement tips for better shortlisting chances |
-| 🎨 Attractive UI | Modern responsive interface with drag-and-drop upload |
-| 🔒 Local Processing | Runs locally without requiring paid APIs |
+| :page_facing_up: Resume Upload | Upload candidate resumes in `PDF` or `DOCX` format |
+| :memo: Job Description Matching | Paste any job description for custom role-based analysis |
+| :dart: Match Score | Generates a professional score out of `100` |
+| :trophy: Candidate Ranking | Shows ranking tier such as strong fit, competitive, or low alignment |
+| :white_check_mark: Matched Skills | Highlights skills found in both resume and job description |
+| :warning: Missing Skills | Shows important job skills not clearly present in the resume |
+| :bar_chart: Score Breakdown | Explains score across skills, experience, relevance, education, and quality |
+| :bulb: Improvement Suggestions | Gives actionable tips to improve resume shortlisting chances |
+| :brain: Optional LLM Layer | Uses Groq API when configured, with local rule-based fallback |
+| :lock: Privacy Friendly | Processes uploaded files in memory and does not store resumes |
+| :art: Modern UI | Attractive responsive frontend with drag-and-drop upload |
 
 ---
 
-## 🖥️ Application Preview
-
-> Upload your resume, paste a job description, and get a clean AI-style shortlisting report instantly.
+## :desktop_computer: Application Flow
 
 ```text
-Resume + Job Description
-          ↓
-Text Extraction
-          ↓
-Skill & Relevance Analysis
-          ↓
-Professional Match Report
+User uploads PDF/DOCX resume
+          |
+          v
+User pastes job description
+          |
+          v
+FastAPI receives multipart form data
+          |
+          v
+Text is extracted from resume
+          |
+          v
+Skills, experience, education, relevance, and quality are analyzed
+          |
+          v
+System returns score, verdict, ranking, gaps, and suggestions
 ```
 
 ---
 
-## 🧠 How It Works
+## :brain: How It Works
 
-ShortlistAI uses an explainable rule-based AI approach instead of a black-box model. It extracts text from the uploaded resume, compares it with the job description, detects relevant skills, analyzes important resume signals, and generates a structured candidate report.
+ShortlistAI uses a **hybrid AI-style screening approach**:
 
-### Scoring Model
+1. **Text Extraction** - Reads resume content from PDF/DOCX files.
+2. **Skill Detection** - Finds technical, business, cloud, database, and professional skills.
+3. **Job Relevance Analysis** - Compares resume text with job description text.
+4. **Experience Matching** - Checks years of experience and seniority signals.
+5. **Education Matching** - Looks for degree and qualification fit.
+6. **Resume Quality Review** - Checks sections, contact info, action verbs, and measurable impact.
+7. **LLM Enhancement** - If `GROQ_API_KEY` is available, the app asks an LLM for a structured recruiter-style report.
+8. **Safe Fallback** - If no API key is present, the local explainable scoring engine still works.
+
+---
+
+## :bar_chart: Scoring Model
 
 | Category | Weight |
 | --- | ---: |
@@ -80,84 +94,104 @@ ShortlistAI uses an explainable rule-based AI approach instead of a black-box mo
 | Education Alignment | `10%` |
 | Resume Quality | `10%` |
 
-This makes the result easy to understand and present during demos or viva/project reviews.
+The final score is normalized from `0` to `100`, making the result easy to understand and present.
 
 ---
 
-## 🛠️ Tech Stack
+## :hammer_and_wrench: Tech Stack
 
 | Layer | Technology |
 | --- | --- |
+| Backend | Python, FastAPI, Uvicorn |
 | Frontend | HTML, CSS, JavaScript |
-| Backend | Python, Flask |
+| Templates | Jinja2 |
 | PDF Parsing | pypdf |
 | DOCX Parsing | python-docx |
-| Testing | unittest |
+| AI/LLM Optional | Groq API |
+| Testing | unittest, FastAPI TestClient |
 
 ---
 
-## 📂 Project Structure
+## :file_folder: Project Structure
 
 ```text
 AI Based Resume/
-│
-├── app.py                  # Flask web server and API routes
-├── file_parser.py          # PDF/DOCX text extraction logic
-├── resume_analyzer.py      # Resume matching and scoring engine
-├── requirements.txt        # Python dependencies
-├── README.md               # Project documentation
-│
-├── templates/
-│   └── index.html          # Main web interface
-│
-├── static/
-│   ├── css/
-│   │   └── styles.css      # Attractive responsive UI styling
-│   └── js/
-│       └── app.js          # Upload, API call, and result rendering logic
-│
-└── tests/
-    └── test_analyzer.py    # Unit tests for analyzer and API
+|
+|-- app.py                  # FastAPI server, routes, validation, file upload API
+|-- env_loader.py           # Loads local environment variables from .env
+|-- file_parser.py          # Extracts text from PDF and DOCX resumes
+|-- llm_resume_analyzer.py  # Optional Groq LLM screening layer
+|-- resume_analyzer.py      # Core scoring, skill matching, verdicts, suggestions
+|-- requirements.txt        # Python dependencies
+|-- README.md               # Project documentation
+|
+|-- templates/
+|   `-- index.html          # Main web page template
+|
+|-- static/
+|   |-- css/
+|   |   `-- styles.css      # Modern responsive styling
+|   `-- js/
+|       `-- app.js          # File upload, API call, and result rendering
+|
+`-- tests/
+    `-- test_analyzer.py    # Analyzer and FastAPI endpoint tests
 ```
 
 ---
 
-## 🚀 How to Run Locally
+## :rocket: Run Locally
 
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/ai-based-resume-shortlisting.git
 cd ai-based-resume-shortlisting
 ```
 
-### 2️⃣ Create a Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-### 3️⃣ Activate the Virtual Environment
+### 3. Activate Virtual Environment
 
-For Windows:
+**Windows PowerShell**
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-For macOS/Linux:
+**macOS/Linux**
 
 ```bash
 source .venv/bin/activate
 ```
 
-### 4️⃣ Install Requirements
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5️⃣ Run the Application
+### 5. Configure Groq API - Optional
+
+The project works without an API key using the local scoring engine. To enable LLM-assisted screening, create a `.env` file:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=openai/gpt-oss-20b
+USE_GROQ_LLM=true
+```
+
+To force local-only analysis:
+
+```env
+USE_GROQ_LLM=false
+```
+
+### 6. Start the App
 
 ```bash
 python app.py
@@ -169,9 +203,61 @@ Open in browser:
 http://127.0.0.1:5000
 ```
 
+FastAPI docs are available at:
+
+```text
+http://127.0.0.1:5000/docs
+```
+
 ---
 
-## 🧪 Run Tests
+## :electric_plug: API Endpoints
+
+### Health Check
+
+```http
+GET /api/health
+```
+
+Example response:
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### Analyze Resume
+
+```http
+POST /api/analyze
+```
+
+Form data:
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `resume` | File | Yes | PDF or DOCX resume |
+| `job_description` | Text | Yes | Complete job description, minimum 80 characters |
+
+Response includes:
+
+```json
+{
+  "file_name": "candidate.docx",
+  "match_score": 82,
+  "ranking": { "tier": "A", "label": "Strong contender" },
+  "verdict": { "title": "Highly recommended" },
+  "matched_skills": [],
+  "missing_skills": [],
+  "score_breakdown": [],
+  "suggestions": []
+}
+```
+
+---
+
+## :test_tube: Run Tests
 
 ```bash
 python -m unittest discover -s tests -v
@@ -186,72 +272,54 @@ OK
 
 ---
 
-## 🔌 API Endpoint
+## :dart: Use Cases
 
-### Analyze Resume
-
-```http
-POST /api/analyze
-```
-
-Form data:
-
-| Field | Type | Required |
-| --- | --- | --- |
-| `resume` | PDF/DOCX file | Yes |
-| `job_description` | Text | Yes |
-
-Response includes:
-
-- `match_score`
-- `ranking`
-- `verdict`
-- `matched_skills`
-- `missing_skills`
-- `score_breakdown`
-- `suggestions`
-
----
-
-## 🎯 Use Cases
-
-- College final-year project
 - AI/ML mini project
-- HR resume screening demo
-- Job seeker resume optimization tool
-- GitHub portfolio project
-- Flask web development practice
+- Final-year college project
+- Resume screening demo for HR teams
+- Job seeker resume improvement tool
+- FastAPI portfolio project
+- GitHub project for interviews
 
 ---
 
-## 🌟 Why This Project Is Useful
+## :jigsaw: Key Learning Outcomes
 
-Recruiters often receive many resumes for one job opening. Manually reviewing every resume takes time and may miss important details. ShortlistAI helps by giving a quick, structured, and explainable first-level analysis.
+This project demonstrates:
 
-For job seekers, it also works as a resume improvement assistant by showing missing skills and giving targeted suggestions.
-
----
-
-## 🔮 Future Enhancements
-
-- Add login system for recruiters
-- Store candidate reports in a database
-- Export analysis as PDF
-- Add multiple resume ranking at once
-- Integrate advanced NLP embeddings
-- Add dashboard analytics for HR users
-- Deploy on Render, Railway, or PythonAnywhere
+- FastAPI routing and file upload handling
+- Multipart form processing
+- PDF/DOCX text extraction
+- Rule-based NLP and scoring logic
+- Optional LLM integration
+- Frontend-to-backend API communication
+- Clean UI rendering with JavaScript
+- Unit testing with FastAPI TestClient
 
 ---
 
-## ⚠️ Responsible Use
+## :crystal_ball: Future Enhancements
 
-ShortlistAI is a **decision-support tool**, not a final hiring authority. It should be used to assist human reviewers, not replace them. Final hiring decisions should always consider human judgment, transferable skills, accessibility needs, and fair hiring practices.
+- Upload and rank multiple resumes at once
+- Export candidate report as PDF
+- Add recruiter login and saved history
+- Add database support with PostgreSQL or MongoDB
+- Use embeddings for deeper semantic similarity
+- Add admin dashboard with analytics
+- Deploy on Render, Railway, or Azure
 
 ---
 
-## 👩‍💻 Author
+## :warning: Responsible Use
 
-**Made with ❤️ for AI-based resume shortlisting projects.**
+ShortlistAI is a **decision-support tool**, not a replacement for human hiring judgment. It should be used to support fair and consistent screening, not to make final hiring decisions automatically.
 
-If you like this project, consider giving it a ⭐ on GitHub!
+Avoid using protected characteristics such as age, gender, religion, caste, ethnicity, disability, marital status, or nationality in screening decisions.
+
+---
+
+## :woman_technologist: Author
+
+Made with :heart: for AI-based resume shortlisting projects.
+
+If this project helps you, give it a :star: on GitHub!
