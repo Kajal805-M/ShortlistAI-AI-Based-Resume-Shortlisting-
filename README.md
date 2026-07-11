@@ -1,12 +1,13 @@
 ---
+
 title: ShortlistAI Resume Analyzer
-emoji: 🦀
-colorFrom: pink
+emoji: 📄
+colorFrom: green
 colorTo: blue
-sdk: static
+sdk: docker
+app_port: 7860
 pinned: false
-license: other
-short_description: ShortlistAI is an AI-based resume shortlisting app.
+
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
