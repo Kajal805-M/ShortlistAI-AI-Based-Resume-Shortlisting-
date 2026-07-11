@@ -1,3 +1,13 @@
+---
+title: ShortlistAI Resume Analyzer
+emoji: 📄
+colorFrom: green
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 <div align="center">
 
 # :robot: ShortlistAI - AI Based Resume Shortlisting
