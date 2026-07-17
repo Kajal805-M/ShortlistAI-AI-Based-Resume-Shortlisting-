@@ -1,202 +1,287 @@
 <div align="center">
 
-# 🚀 ShortlistAI - AI Powered Resume Shortlisting 
+# 🚀 ShortlistAI – AI-Based Resume Shortlisting 
 
 ### Intelligent Resume Screening & Job Matching using Large Language Models (LLMs)
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python">
-  <img src="https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B?style=for-the-badge&logo=streamlit">
-  <img src="https://img.shields.io/badge/LLM-AI%20Powered-success?style=for-the-badge">
-  <img src="https://img.shields.io/badge/NLP-Resume%20Analysis-orange?style=for-the-badge">
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
+
+<img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python"/>
+
+<img src="https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B?style=for-the-badge&logo=streamlit"/>
+
+<img src="https://img.shields.io/badge/AI-LLM%20Powered-success?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/NLP-Resume%20Analysis-orange?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Open%20Source-GitHub-black?style=for-the-badge&logo=github"/>
+
 </p>
 
-### 🤖 Analyze Resumes Intelligently • Compare with Job Descriptions • Generate ATS-Friendly AI Suggestions
+### 🤖 Analyze • Compare • Improve • Get Shortlisted
+
+> **ShortlistAI** is an AI-powered resume analysis platform that intelligently compares a resume with a job description, evaluates candidate-job alignment, and provides actionable AI-generated feedback to improve interview readiness.
 
 ---
 
-⭐ **If you like this project, don't forget to star the repository!**
+⭐ **If you find this project useful, don't forget to Star the repository!**
 
 </div>
 
 ---
 
-# 📖 Overview
+# 📖 About the Project
 
-**ShortlistAI** is an **LLM-powered Resume Analysis System** that intelligently compares a candidate's resume with a job description and evaluates how well the candidate matches the role.
+Recruiters spend only a few seconds scanning each resume, making it difficult for candidates to know whether their resume truly matches a job description.
 
-Unlike traditional ATS systems that rely only on keyword matching, ShortlistAI leverages a **Large Language Model (LLM)** to understand the contextual meaning of resumes and job descriptions.
+**ShortlistAI** addresses this challenge by leveraging **Large Language Models (LLMs)** to analyze resumes in context rather than relying solely on keyword matching.
 
-The system analyzes:
+The system evaluates:
 
 - Technical Skills
-- Experience
+- Professional Experience
 - Projects
 - Education
 - Resume Structure
-- ATS Compatibility
 - Job Relevance
+- Missing Skills
+- AI Recommendations
 
-and generates an **AI-powered Resume Match Score** along with personalized suggestions to improve the resume.
+and generates intelligent feedback to help candidates improve their resumes before applying.
 
 ---
+## 💻 Tech Stack
 
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/LLM-AI-green?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/NLP-Prompt%20Engineering-orange?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"/>
+
+<img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black"/>
+
+</p>
+---
 # ✨ Features
 
-- 🤖 LLM-Based Resume Analysis
-- 📄 Resume Upload (PDF & DOCX)
-- 💼 Job Description Analysis
-- 🧠 Context-Aware Resume Matching
-- 📊 AI Resume Match Score
-- 🎯 Skill Gap Detection
-- 🔍 Semantic Resume Understanding
-- 💡 AI-Powered Resume Improvement Suggestions
-- ✅ ATS Compatibility Analysis
-- 📈 Interactive Dashboard
-- ⚡ Fast & Responsive Streamlit Interface
+### 📄 Resume Upload
+
+- Upload Resume in **PDF**
+- Upload Resume in **DOCX**
 
 ---
 
-# 🏗️ System Architecture
+### 💼 Job Description Analysis
+
+- Paste any Job Description
+- AI understands role requirements
+- Context-aware evaluation
+
+---
+
+### 🤖 LLM Powered Analysis
+
+- Intelligent Resume Understanding
+- Semantic Job Matching
+- Skill Gap Detection
+- Resume Strength Analysis
+
+---
+
+### 📊 AI Insights
+
+- Resume Match Score
+- Matched Skills
+- Missing Skills
+- Resume Improvement Suggestions
+
+---
+
+### 🎨 Beautiful Interface
+
+- Interactive Streamlit Dashboard
+- Responsive Layout
+- Clean UI
+- Modern Design
+
+---
+
+# 🧠 How It Works
 
 ```text
-                 Resume (PDF / DOCX)
-                          │
-                          ▼
-                 Resume Text Extraction
-                          │
-                          ▼
-                  Text Preprocessing
-                          │
-                          ▼
-              Job Description Processing
-                          │
-                          ▼
-              Large Language Model (LLM)
-                          │
-      ┌───────────────────┼────────────────────┐
-      ▼                   ▼                    ▼
- Resume Analysis    Skill Extraction    ATS Evaluation
-      │                   │                    │
-      └───────────────────┼────────────────────┘
-                          ▼
-               Resume Match Score
-                          │
-                          ▼
-             AI Suggestions & Feedback
+                 Resume Upload
+                       │
+                       ▼
+            Resume Text Extraction
+                       │
+                       ▼
+              Document Preprocessing
+                       │
+                       ▼
+           Job Description Processing
+                       │
+                       ▼
+          Large Language Model (LLM)
+                       │
+       ┌───────────────┼───────────────┐
+       ▼               ▼               ▼
+ Resume Analysis   Skill Matching   AI Suggestions
+       │               │               │
+       └───────────────┼───────────────┘
+                       ▼
+             Resume Match Evaluation
+                       │
+                       ▼
+               Final AI Report
 ```
 
 ---
 
-# 🧠 AI Workflow
+# 🏗 Project Architecture
 
 ```text
-Resume Upload
-      │
-      ▼
-Extract Resume Text
-      │
-      ▼
-Analyze Job Description
-      │
-      ▼
-LLM Semantic Understanding
-      │
-      ▼
-Skill Matching
-      │
-      ▼
-ATS Analysis
-      │
-      ▼
-Resume Match Score
-      │
-      ▼
-AI Improvement Suggestions
+                    User
+                      │
+                      ▼
+             Streamlit Web App
+                      │
+          ┌───────────┴───────────┐
+          ▼                       ▼
+    File Parser             Job Description
+          │                       │
+          ▼                       ▼
+     Resume Text          Cleaned Job Text
+                  │
+                  ▼
+       LLM Resume Analyzer
+                  │
+                  ▼
+        AI Evaluation Engine
+                  │
+                  ▼
+      Match Score & Suggestions
+                  │
+                  ▼
+         Interactive Dashboard
 ```
-
----
-
-# 🛠️ Tech Stack
-
-| Category | Technologies |
-|----------|--------------|
-| Language | Python |
-| Frontend | Streamlit |
-| AI | Large Language Model (LLM) |
-| NLP | Prompt Engineering |
-| Visualization | Plotly |
-| PDF Parsing | PyPDF |
-| DOCX Parsing | python-docx |
-| Environment | Virtual Environment |
 
 ---
 
 # 📂 Project Structure
 
 ```text
-ShortlistAI/
+ShortlistAI
 │
-├── app.py
-├── llm_resume_analyzer.py
-├── env_loader.py
+├── app.py                     # Streamlit Application
+├── llm_resume_analyzer.py     # LLM-based Resume Analysis
+├── resume_analyzer.py         # Resume Scoring Logic
+├── file_parser.py             # PDF & DOCX Parser
+├── env_loader.py              # Environment Configuration
 ├── requirements.txt
 ├── README.md
 │
 ├── static/
-│   └── css/
+│   ├── css/
+│   └── js/
 │
 ├── templates/
+│   └── index.html
 │
-├── tests/
-│
-└── assets/
+└── tests/
+    └── test_analyzer.py
 ```
 
 ---
 
-# ⚙️ Installation
+# 🛠 Tech Stack
 
-### Clone Repository
+| Category | Technologies |
+|-----------|--------------|
+| Programming Language | Python |
+| Frontend | Streamlit |
+| Artificial Intelligence | Large Language Model (LLM) |
+| NLP | Prompt Engineering |
+| File Parsing | PyPDF, python-docx |
+| Styling | HTML, CSS, JavaScript |
+| Environment | Python Virtual Environment |
+
+---
+
+# ⚙ Installation
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/Kajal805-M/ShortlistAI-AI-Based-Resume-Shortlisting-.git
 ```
 
-### Go to Project Directory
+---
+
+## Move into Project
 
 ```bash
 cd ShortlistAI-AI-Based-Resume-Shortlisting-
 ```
 
-### Create Virtual Environment
+---
+
+## Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-### Activate Virtual Environment
+---
 
-#### Windows
+## Activate Environment
+
+### Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-#### Linux / macOS
+### Linux / macOS
 
 ```bash
 source .venv/bin/activate
 ```
 
-### Install Dependencies
+---
+
+## Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run Application
+---
+
+## Configure Environment Variables
+
+Create a `.env` file and add your API key (if your project requires one):
+
+```env
+API_KEY=YOUR_API_KEY
+```
+
+---
+
+## Run the Application
 
 ```bash
 streamlit run app.py
@@ -204,60 +289,73 @@ streamlit run app.py
 
 ---
 
-# 📊 What the System Analyzes
+# 📊 System Capabilities
 
-✅ Resume Context
+✅ Resume Parsing
 
-✅ Technical Skills
+✅ AI Resume Analysis
 
-✅ Projects
+✅ Job Description Understanding
 
-✅ Work Experience
+✅ Skill Matching
 
-✅ Education
+✅ Missing Skill Detection
 
-✅ Missing Skills
+✅ AI Resume Suggestions
 
-✅ ATS Compatibility
+✅ Resume Evaluation
 
-✅ Resume Strengths
-
-✅ Resume Weaknesses
-
-✅ AI Recommendations
+✅ Interactive Dashboard
 
 ---
 
 # 🎯 Use Cases
 
 - Students
-- Freshers
-- Working Professionals
+- Fresh Graduates
+- Software Engineers
+- Data Scientists
+- AI Engineers
 - Recruiters
 - HR Teams
 - Career Coaches
-- Placement Cells
 
 ---
 
-# 🚀 Future Improvements
+# 🚀 Future Roadmap
 
-- Multi Resume Ranking
+- Resume Ranking
 - Recruiter Dashboard
 - AI Resume Rewriter
-- AI Cover Letter Generator
+- Cover Letter Generator
 - Interview Question Generator
-- Job Recommendation System
 - Resume PDF Report
-- Voice Resume Review
+- Resume History
+- Multi Resume Screening
 - Multi Language Support
-- Multiple LLM Support
+- Job Recommendation Engine
+
+---
+
+# 📸 Screenshots
+
+> Add screenshots of your application here.
+
+Example:
+
+```
+assets/dashboard.png
+
+assets/result.png
+
+assets/analysis.png
+```
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are always welcome.
 
 1. Fork the repository
 
@@ -273,13 +371,13 @@ git checkout -b feature-name
 git commit -m "Added new feature"
 ```
 
-4. Push changes
+4. Push
 
 ```bash
 git push origin feature-name
 ```
 
-5. Create a Pull Request
+5. Open a Pull Request
 
 ---
 
@@ -295,18 +393,18 @@ This project is licensed under the MIT License.
 
 **M.Sc. Data Science**
 
-AI • Machine Learning • Deep Learning • LLM • NLP
+Artificial Intelligence • Machine Learning • NLP • LLM
 
-📧 Email: mauryakajal444@gmail.com
+📧 **Email:** mauryakajal444@gmail.com
 
-🔗 GitHub: https://github.com/Kajal805-M
+🌐 **GitHub:** https://github.com/Kajal805-M
 
 ---
 
 <div align="center">
 
-### 🌟 If you found this project useful, please give it a Star!
+## ⭐ If this project helped you, please consider giving it a Star!
 
-**Made with ❤️ using Python, Streamlit and Large Language Models**
+**Built with ❤️ using Python, Streamlit, and Large Language Models**
 
 </div>
