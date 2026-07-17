@@ -1,130 +1,265 @@
-# ShortlistAI - AI Based Resume Shortlisting
+<div align="center">
 
-ShortlistAI is a FastAPI web app that compares a candidate resume with a job description and returns an explainable screening report. It supports PDF and DOCX uploads, extracts resume text in memory, scores role fit, and highlights matched skills, missing skills, ranking, verdict, and improvement suggestions.
+# 🚀 ShortlistAI - AI Based Resume Shortlisting System
 
-The app works locally without an API key using the built-in rule-based analyzer. If a Gemini API key is configured, it can optionally enhance the report with an LLM-assisted analysis layer.
+### Intelligent Resume Screening using AI & NLP
 
-## Features
+<img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python"/>
+<img src="https://img.shields.io/badge/Streamlit-WebApp-red?style=for-the-badge&logo=streamlit"/>
+<img src="https://img.shields.io/badge/Scikit--Learn-ML-orange?style=for-the-badge&logo=scikit-learn"/>
+<img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Open%20Source-Yes-success?style=for-the-badge"/>
 
-- Upload PDF or DOCX resumes up to 8 MB.
-- Paste any complete job description.
-- Generate a match score out of 100.
-- Show matched skills, missing skills, score breakdown, ranking, and verdict.
-- Provide practical resume improvement suggestions.
-- Process uploaded resumes in memory without saving files.
-- Use local rule-based analysis by default, with optional Gemini LLM support.
-- Includes unit tests for analyzer behavior and the API endpoint.
+---
 
-## Tech Stack
+### 🎯 AI-powered Resume Analyzer that compares resumes with Job Descriptions and generates ATS-friendly insights.
 
-- Python
-- FastAPI
-- Uvicorn
-- Jinja2
-- HTML, CSS, JavaScript
-- pypdf
-- python-docx
-- Google GenAI SDK, optional
-- unittest and FastAPI TestClient
+</div>
 
-## Project Structure
+---
+
+# 📌 Overview
+
+**ShortlistAI** is an AI-powered Resume Shortlisting System that helps candidates evaluate how well their resume matches a specific job description.
+
+The application extracts resume content, analyzes skills, calculates semantic similarity, identifies missing skills, and generates actionable ATS-friendly recommendations.
+
+Instead of manually comparing resumes with job descriptions, ShortlistAI provides an intelligent match score within seconds.
+
+---
+
+# ✨ Features
+
+✅ Upload Resume (PDF / DOCX)
+
+✅ Paste Job Description
+
+✅ Resume Match Score
+
+✅ Skill Gap Analysis
+
+✅ Keyword Matching
+
+✅ Resume Section Analysis
+
+✅ ATS-Friendly Suggestions
+
+✅ Professional Dashboard
+
+✅ Interactive Charts
+
+✅ Beautiful Streamlit UI
+
+---
+
+# 📸 Demo
+
+> *(Add screenshots/GIFs here after uploading them.)*
+
+```
+Home Dashboard
+Resume Analysis
+Skill Matching
+ATS Suggestions
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Programming | Python |
+| Frontend | Streamlit |
+| Machine Learning | Scikit-Learn |
+| NLP | TF-IDF, Cosine Similarity |
+| Visualization | Plotly |
+| PDF Parsing | PyPDF |
+| DOCX Parsing | python-docx |
+
+---
+
+# 📂 Project Structure
 
 ```text
-AI Based Resume/
-|-- app.py
-|-- env_loader.py
-|-- file_parser.py
-|-- llm_resume_analyzer.py
-|-- resume_analyzer.py
-|-- requirements.txt
-|-- README.md
-|-- templates/
-|   `-- index.html
-|-- static/
-|   |-- css/
-|   |   `-- styles.css
-|   `-- js/
-|       `-- app.js
-`-- tests/
-    `-- test_analyzer.py
+ShortlistAI-AI-Based-Resume-Shortlisting
+│
+├── app.py
+├── resume_model.py
+├── requirements.txt
+├── README.md
+│
+├── templates/
+├── static/
+│
+├── tests/
+│
+└── assets/
 ```
 
-## Run Locally
+---
 
-Create and activate a virtual environment:
+# ⚙️ Installation
 
-```powershell
+Clone the repository
+
+```bash
+git clone https://github.com/Kajal805-M/ShortlistAI-AI-Based-Resume-Shortlisting-.git
+```
+
+Go inside the project
+
+```bash
+cd ShortlistAI-AI-Based-Resume-Shortlisting-
+```
+
+Create virtual environment
+
+```bash
 python -m venv .venv
-.venv\Scripts\Activate.ps1
 ```
 
-Install dependencies:
+Activate environment
 
-```powershell
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-Start the app:
+Run application
 
-```powershell
-python app.py
+```bash
+streamlit run app.py
 ```
 
-Open:
+---
 
-```text
-http://127.0.0.1:5000
+# 🚀 Workflow
+
+```
+Resume Upload
+        │
+        ▼
+Extract Resume Text
+        │
+        ▼
+Clean & Process Text
+        │
+        ▼
+Skill Extraction
+        │
+        ▼
+Keyword Matching
+        │
+        ▼
+Similarity Calculation
+        │
+        ▼
+ATS Analysis
+        │
+        ▼
+Final Resume Score
+        │
+        ▼
+Improvement Suggestions
 ```
 
-API docs are available at:
+---
 
-```text
-http://127.0.0.1:5000/docs
-```
+# 📊 AI Scoring System
 
-## Optional Gemini Configuration
+The final score is generated using multiple evaluation parameters.
 
-The app runs without these values. To enable LLM-assisted analysis, create a local `.env` file:
+| Parameter | Weight |
+|-----------|---------|
+| Semantic Similarity | 40% |
+| Skill Matching | 35% |
+| Keyword Matching | 20% |
+| Resume Structure | 5% |
 
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL=gemini-3.1-flash-lite
-USE_GEMINI_LLM=true
-```
+---
 
-To force local-only analysis:
+# 💡 Future Improvements
 
-```env
-USE_GEMINI_LLM=false
-```
+- AI Resume Rewriter
+- Cover Letter Generator
+- Recruiter Dashboard
+- Resume Ranking
+- Multiple Resume Screening
+- LLM Integration
+- GPT-powered Suggestions
+- Interview Question Generator
+- Resume PDF Report
+- Dark Mode
 
-## API Endpoints
+---
 
-Health check:
+# 📈 Why ShortlistAI?
 
-```http
-GET /api/health
-```
+Traditional resume screening is time-consuming.
 
-Analyze resume:
+ShortlistAI automates the process by:
 
-```http
-POST /api/analyze
-```
+✔ Comparing resumes with job descriptions
 
-Required multipart form fields:
+✔ Finding missing skills
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `resume` | File | PDF or DOCX resume |
-| `job_description` | Text | Complete job description, minimum 80 characters |
+✔ Generating ATS-friendly recommendations
 
-## Run Tests
+✔ Helping candidates improve resumes before applying
 
-```powershell
-python -m unittest discover -s tests -v
-```
+---
 
-## Responsible Use
+# 🤝 Contributing
 
-ShortlistAI is a decision-support tool, not a final hiring decision system. Review candidates holistically and avoid using protected characteristics in screening decisions.
+Contributions are welcome.
+
+1. Fork this repository
+
+2. Create a new branch
+
+3. Commit your changes
+
+4. Open a Pull Request
+
+---
+
+# ⭐ Support
+
+If you like this project,
+
+⭐ Star this repository
+
+🍴 Fork it
+
+📢 Share it with others
+
+---
+
+# 👩‍💻 Author
+
+## Kajal Maurya
+
+**M.Sc. Data Science | AI & ML Enthusiast**
+
+GitHub
+
+https://github.com/Kajal805-M
+
+
+---
+
+<div align="center">
+
+## ⭐ If you found this project useful, don't forget to Star the repository ⭐
+
+Made with ❤️ using Python & AI
+
+</div>
