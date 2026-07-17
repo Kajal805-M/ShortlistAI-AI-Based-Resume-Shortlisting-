@@ -5,8 +5,8 @@ import os
 from resume_analyzer import _ranking, analyze_resume
 
 
-DEFAULT_GROQ_MODEL = "openai/gpt-oss-20b"
-MAX_TEXT_CHARS = 14000
+DEFAULT_GEMINI_MODEL = "gemini-3.1-flash-lite"
+MAX_TEXT_CHARS = 6000
 logger = logging.getLogger("shortlistai.analyzer")
 
 
@@ -89,68 +89,71 @@ def analyze_resume_with_llm(resume_text, job_description, filename="resume"):
         len(baseline["missing_skills"]),
     )
 
-    api_key = os.environ.get("GROQ_API_KEY")
-    use_groq = os.environ.get("USE_GROQ_LLM", "true").lower() not in {"0", "false", "no", "off"}
+    api_key = os.environ.get("GEMINI_API_KEY")
+    use_gemini = os.environ.get("USE_GEMINI_LLM", "true").lower() not in {"0", "false", "no", "off"}
     if not api_key:
-        logger.info("Groq LLM skipped: GROQ_API_KEY is not set")
+        logger.info("Gemini LLM skipped: GEMINI_API_KEY is not set")
         baseline["analysis_mode"] = "rules_fallback"
         return baseline
-    if not use_groq:
-        logger.info("Groq LLM skipped: USE_GROQ_LLM disables it")
+    if not use_gemini:
+        logger.info("Gemini LLM skipped: USE_GEMINI_LLM disables it")
         baseline["analysis_mode"] = "rules_fallback"
         return baseline
 
     try:
-        logger.info("Requesting Groq LLM report model=%s", os.environ.get("GROQ_MODEL", DEFAULT_GROQ_MODEL))
+        logger.info("Requesting Gemini LLM report model=%s", ", ".join(_gemini_models()))
         llm_report = _request_llm_report(resume_text, job_description, baseline, api_key)
         report = _finalize_report(llm_report, baseline, filename)
         logger.info(
-            "Groq LLM report accepted score=%s matched=%s missing=%s",
+            "Gemini LLM report accepted score=%s matched=%s missing=%s",
             report["match_score"],
             len(report["matched_skills"]),
             len(report["missing_skills"]),
         )
         return report
     except Exception:
-        logger.exception("Groq LLM failed; using rule-based fallback")
+        logger.exception("Gemini LLM failed; using rule-based fallback")
         baseline["analysis_mode"] = "rules_fallback"
         return baseline
 
 
 def _request_llm_report(resume_text, job_description, baseline, api_key):
-    from groq import Groq
+    from google import genai
 
-    client = Groq(api_key=api_key, timeout=30.0, max_retries=1)
-    response = client.chat.completions.create(
-        model=os.environ.get("GROQ_MODEL", DEFAULT_GROQ_MODEL),
-        temperature=float(os.environ.get("GROQ_TEMPERATURE", "0.2")),
-        max_tokens=1800,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a careful resume screening assistant. Compare only the provided resume "
-                    "and job description. Ignore protected characteristics and do not infer age, gender, "
-                    "religion, caste, ethnicity, disability, marital status, or nationality. Score job fit, "
-                    "evidence strength, relevant skills, experience alignment, education alignment, and "
-                    "resume quality. Return concise, recruiter-useful JSON only."
-                ),
-            },
-            {
-                "role": "user",
-                "content": _build_prompt(resume_text, job_description, baseline),
-            },
-        ],
-        response_format={
-            "type": "json_schema",
-            "json_schema": {
-                "name": "resume_screening_report",
-                "strict": True,
-                "schema": REPORT_SCHEMA,
-            },
-        },
-    )
-    return json.loads(response.choices[0].message.content or "{}")
+    client = genai.Client(api_key=api_key)
+    prompt = _build_prompt(resume_text, job_description, baseline)
+    last_error = None
+
+    for model in _gemini_models():
+        try:
+            logger.info("Trying Gemini model=%s", model)
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config={
+                    "temperature": float(os.environ.get("GEMINI_TEMPERATURE", "0.2")),
+                    "response_mime_type": "application/json",
+                },
+            )
+            return _parse_json_response(response.text or "")
+        except Exception as error:
+            last_error = error
+            logger.warning("Gemini model %s failed: %s", model, error)
+
+    raise last_error
+
+
+def _gemini_models():
+    configured = os.environ.get("GEMINI_MODEL", "").strip()
+    fallback = os.environ.get("GEMINI_FALLBACK_MODELS", "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-flash-latest")
+    models = [configured] if configured else []
+    models.extend(model.strip() for model in fallback.split(",") if model.strip())
+
+    unique = []
+    for model in models:
+        if model not in unique:
+            unique.append(model)
+    return unique or [DEFAULT_GEMINI_MODEL]
 
 
 def _build_prompt(resume_text, job_description, baseline):
@@ -158,6 +161,11 @@ def _build_prompt(resume_text, job_description, baseline):
 Analyze this candidate for the role and produce a better semantic screening report.
 
 Rules:
+- You are a careful resume screening assistant.
+- Compare only the provided resume and job description.
+- Return one valid JSON object only. Do not include markdown, comments, or extra text.
+- JSON must include: match_score, summary, matched_skills, missing_skills, score_breakdown, suggestions.
+- Ignore protected characteristics and do not infer age, gender, religion, caste, ethnicity, disability, marital status, or nationality.
 - Keep match_score calibrated: 90+ only for exceptional direct evidence, 75+ for strong fit, 50-74 for partial fit, below 50 for weak fit.
 - score_breakdown must contain exactly these five labels and max values:
   Skills match / 40, Experience / 20, Job relevance / 20, Education / 10, Resume quality / 10.
@@ -180,6 +188,20 @@ Job description:
 {_limit_text(job_description)}
 \"\"\"
 """.strip()
+
+
+def _parse_json_response(text):
+    text = text.strip()
+    if not text:
+        return {}
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start == -1 or end == -1 or end <= start:
+            raise
+        return json.loads(text[start : end + 1])
 
 
 def _compact_baseline(report):
@@ -221,8 +243,8 @@ def _finalize_report(llm_report, baseline, filename):
         "score_breakdown": breakdown,
         "suggestions": _normalize_suggestions(llm_report.get("suggestions"), baseline["suggestions"]),
         "stats": stats,
-        "disclaimer": "LLM-assisted screening estimate, not a hiring decision. Review candidates holistically and avoid using protected characteristics.",
-        "analysis_mode": "groq_llm",
+        "disclaimer": "Gemini-assisted screening estimate, not a hiring decision. Review candidates holistically and avoid using protected characteristics.",
+        "analysis_mode": "gemini_llm",
     }
     return report
 
@@ -269,7 +291,7 @@ def _normalize_skills(items, fallback):
         seen.add(name.lower())
         normalized.append({"name": name[:40], "category": category[:40] or "Other"})
 
-    return normalized
+    return normalized if normalized else fallback
 
 
 def _normalize_suggestions(items, fallback):

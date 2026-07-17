@@ -4,16 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI-powered resume and job description matching with explainable scoring.">
-  <title>ShortlistAI — Resume Intelligence</title>
+  <title>ShortlistAI - Resume Intelligence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
   <header class="topbar">
     <a class="brand" href="#" aria-label="ShortlistAI home">
       <span class="brand-mark"><span></span><span></span><span></span></span>
@@ -27,11 +24,11 @@
 
   <main>
     <section class="hero" id="analyzer">
-      <div class="eyebrow"><span>✦</span> Intelligent candidate matching</div>
+      <div class="eyebrow"><span>*</span> Intelligent candidate matching</div>
       <h1>Find the signal.<br><em>Shortlist smarter.</em></h1>
       <p class="hero-copy">Compare any resume against any job description with transparent, evidence-based scoring built for thoughtful hiring.</p>
       <div class="trust-row">
-        <span>✓ Explainable scores</span><span>✓ No resume storage</span><span>✓ Bias-aware guidance</span>
+        <span>Explainable scores</span><span>No resume storage</span><span>Bias-aware guidance</span>
       </div>
     </section>
 
@@ -40,19 +37,19 @@
         <article class="input-card">
           <div class="card-heading">
             <span class="step">01</span>
-            <div><h2>Upload resume</h2><p>PDF or DOCX · Max 8 MB</p></div>
+            <div><h2>Upload resume</h2><p>PDF or DOCX - Max 8 MB</p></div>
           </div>
           <label class="dropzone" id="dropzone" for="resume-file">
             <input id="resume-file" name="resume" type="file" accept=".pdf,.docx" required>
-            <span class="upload-icon">↥</span>
+            <span class="upload-icon">↑</span>
             <strong>Drop your resume here</strong>
             <span>or <u>browse your files</u></span>
-            <small>We process files in memory and never store them.</small>
+            <small>Files are processed in memory and never stored.</small>
           </label>
           <div class="file-preview" id="file-preview" hidden>
             <span class="file-type" id="file-type">PDF</span>
             <div><strong id="file-name"></strong><small id="file-size"></small></div>
-            <button type="button" id="remove-file" aria-label="Remove file">×</button>
+            <button type="button" id="remove-file" aria-label="Remove file">x</button>
           </div>
         </article>
 
@@ -62,14 +59,14 @@
             <div><h2>Add job description</h2><p>Paste the complete role details</p></div>
           </div>
           <div class="textarea-wrap">
-            <textarea id="job-description" name="job_description" minlength="80" placeholder="Paste the job title, responsibilities, required skills, experience, and qualifications here…" required></textarea>
+            <textarea id="job-description" name="job_description" minlength="80" placeholder="Paste the job title, responsibilities, required skills, experience, and qualifications here..." required></textarea>
             <span class="word-count"><b id="word-count">0</b> words</span>
           </div>
         </article>
 
         <button class="analyze-button" id="analyze-button" type="submit">
-          <span class="button-label"><b>✦</b> Analyze candidate</span>
-          <span class="button-loading"><i></i> Reading & evaluating…</span>
+          <span class="button-label"><b>*</b> Analyze candidate</span>
+          <span class="button-loading"><i></i> Reading and evaluating...</span>
         </button>
         <p class="form-error" id="form-error" role="alert"></p>
       </form>
@@ -78,7 +75,7 @@
     <section class="results" id="results" hidden aria-live="polite">
       <div class="results-topline">
         <div><span class="section-kicker">Candidate intelligence report</span><h2 id="result-filename">Resume analysis</h2></div>
-        <button class="secondary-button" id="new-analysis">↻ New analysis</button>
+        <button class="secondary-button" id="new-analysis">New analysis</button>
       </div>
 
       <div class="overview-grid">
@@ -119,7 +116,7 @@
           <h3>Recruiter verdict</h3>
           <div class="verdict-banner" id="verdict-banner"><span>✓</span><strong id="verdict-banner-title"></strong></div>
           <p id="result-summary"></p>
-          <div class="fair-use"><span>◈</span><p><strong>Human review matters.</strong> This tool evaluates job-related text only and should support—not replace—fair hiring judgment.</p></div>
+          <div class="fair-use"><span>•</span><p><strong>Human review matters.</strong> This tool evaluates job-related text only and should support, not replace, fair hiring judgment.</p></div>
         </article>
       </div>
 
@@ -156,5 +153,3 @@
   <script src="{{ url_for('static', path='/js/app.js') }}"></script>
 </body>
 </html>
-
-

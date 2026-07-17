@@ -1,10 +1,14 @@
 import io
+import os
 import unittest
+
+os.environ["USE_GEMINI_LLM"] = "false"
 
 from docx import Document
 from fastapi.testclient import TestClient
 
 from app import app
+from llm_resume_analyzer import _finalize_report
 from resume_analyzer import analyze_resume
 
 
@@ -16,7 +20,7 @@ Python backend engineer with 5 years of experience building cloud services.
 Skills
 Python, FastAPI, REST API, PostgreSQL, AWS, Docker, Git, Agile, communication
 Experience
-Senior Software Engineer — built and launched APIs that reduced latency by 35% and served 50K users.
+Senior Software Engineer - built and launched APIs that reduced latency by 35% and served 50K users.
 Led a team of 4 engineers and improved deployment time by 60%.
 Projects
 Developed a machine learning recommendation service using pandas and scikit-learn.
@@ -66,7 +70,24 @@ class AnalyzerTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("match_score", response.json())
 
+    def test_llm_empty_skills_fall_back_to_baseline_skills(self):
+        baseline = analyze_resume(RESUME, JOB, "jordan.docx")
+        llm_report = {
+            "match_score": 78,
+            "summary": "LLM summary",
+            "matched_skills": [],
+            "missing_skills": [],
+            "score_breakdown": baseline["score_breakdown"],
+            "suggestions": baseline["suggestions"],
+        }
+
+        result = _finalize_report(llm_report, baseline, "jordan.docx")
+
+        self.assertEqual(result["match_score"], 78)
+        self.assertEqual(result["matched_skills"], baseline["matched_skills"])
+        self.assertEqual(result["missing_skills"], baseline["missing_skills"])
+        self.assertEqual(result["stats"]["matched"], len(baseline["matched_skills"]))
+
 
 if __name__ == "__main__":
     unittest.main()
-
