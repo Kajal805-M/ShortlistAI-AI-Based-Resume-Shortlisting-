@@ -22,11 +22,31 @@
 
 > **ShortlistAI** is an AI-powered resume analysis platform that intelligently compares a resume with a job description, evaluates candidate-job alignment, and provides actionable AI-generated feedback to improve interview readiness.
 
+<p align="center">
+  <a href="https://shortlistai-ai-based-resume-shortlisting.onrender.com">
+    <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Try%20it%20Now-brightgreen?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo"/>
+  </a>
+</p>
+
+<p align="center">
+  <b>🌐 Live App:</b> <a href="https://shortlistai-ai-based-resume-shortlisting.onrender.com">shortlistai-ai-based-resume-shortlisting.onrender.com</a>
+</p>
+
 ---
 
 ⭐ **If you find this project useful, don't forget to Star the repository!**
 
 </div>
+
+---
+
+## 🔗 Live Demo
+
+Experience ShortlistAI live — no installation required:
+
+### 👉 **[Launch ShortlistAI](https://shortlistai-ai-based-resume-shortlisting.onrender.com)**
+
+> ⚠️ **Note:** The app is hosted on Render's free tier, so it may take **30–60 seconds** to spin up if it has been inactive. Please be patient on first load!
 
 ---
 
@@ -73,6 +93,8 @@ and generates intelligent feedback to help candidates improve their resumes befo
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"/>
 
 <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black"/>
+
+<img src="https://img.shields.io/badge/Render-Deployed-46E3B7?style=for-the-badge&logo=render&logoColor=white"/>
 
 </p>
 ---
@@ -218,12 +240,23 @@ ShortlistAI
 | File Parsing | PyPDF, python-docx |
 | Styling | HTML, CSS, JavaScript |
 | Environment | Python Virtual Environment |
+| Deployment | Render |
 
 ---
 
 # ⚙ Installation
 
-## Clone Repository
+## 🌐 Option 1: Try the Live Demo (Recommended)
+
+No setup needed — just click and go:
+
+### 👉 **[https://shortlistai-ai-based-resume-shortlisting.onrender.com](https://shortlistai-ai-based-resume-shortlisting.onrender.com)**
+
+---
+
+## 💻 Option 2: Run Locally
+
+### Clone Repository
 
 ```bash
 git clone https://github.com/Kajal805-M/ShortlistAI-AI-Based-Resume-Shortlisting-.git
@@ -231,7 +264,7 @@ git clone https://github.com/Kajal805-M/ShortlistAI-AI-Based-Resume-Shortlisting
 
 ---
 
-## Move into Project
+### Move into Project
 
 ```bash
 cd ShortlistAI-AI-Based-Resume-Shortlisting-
@@ -239,7 +272,7 @@ cd ShortlistAI-AI-Based-Resume-Shortlisting-
 
 ---
 
-## Create Virtual Environment
+### Create Virtual Environment
 
 ```bash
 python -m venv .venv
@@ -247,15 +280,15 @@ python -m venv .venv
 
 ---
 
-## Activate Environment
+### Activate Environment
 
-### Windows
+#### Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
-### Linux / macOS
+#### Linux / macOS
 
 ```bash
 source .venv/bin/activate
@@ -263,7 +296,7 @@ source .venv/bin/activate
 
 ---
 
-## Install Requirements
+### Install Requirements
 
 ```bash
 pip install -r requirements.txt
@@ -271,7 +304,7 @@ pip install -r requirements.txt
 
 ---
 
-## Configure Environment Variables
+### Configure Environment Variables
 
 Create a `.env` file and add your API key (if your project requires one):
 
@@ -281,7 +314,7 @@ API_KEY=YOUR_API_KEY
 
 ---
 
-## Run the Application
+### Run the Application
 
 ```bash
 streamlit run app.py
@@ -306,6 +339,8 @@ streamlit run app.py
 ✅ Resume Evaluation
 
 ✅ Interactive Dashboard
+
+✅ Live Hosted Deployment
 
 ---
 
@@ -399,11 +434,15 @@ Artificial Intelligence • Machine Learning • NLP • LLM
 
 🌐 **GitHub:** https://github.com/Kajal805-M
 
+🚀 **Live Project:** https://shortlistai-ai-based-resume-shortlisting.onrender.com
+
 ---
 
 <div align="center">
 
 ## ⭐ If this project helped you, please consider giving it a Star!
+
+### 🚀 [**Try ShortlistAI Live**](https://shortlistai-ai-based-resume-shortlisting.onrender.com)
 
 **Built with ❤️ using Python, Streamlit, and Large Language Models**
 
