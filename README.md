@@ -8,7 +8,7 @@
 
 <img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python"/>
 
-<img src="https://raw.githubusercontent.com/Kajal805-M/ShortlistAI-AI-Based-Resume-Shortlisting-/main/assets/logo.png" width="250">
+<img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Try%20it%20Now-brightgreen?style=for-the-badge&logo=render&logoColor=white">
 
 <img src="https://img.shields.io/badge/AI-LLM%20Powered-success?style=for-the-badge"/>
 
