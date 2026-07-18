@@ -8,9 +8,7 @@
 
 <img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python"/>
 
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" width="60"/>
-  
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" width="60"/>
+<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/
   
 <img src="https://img.shields.io/badge/AI-LLM%20Powered-success?style=for-the-badge"/>
 
